@@ -1,0 +1,139 @@
+[
+  {
+    "date": "2025-01-05",
+    "departure_time": "09:00 AM",
+    "origin": "CM House, Ranchi, Jharkhand",
+    "destination": "Harmu Chowk, Ranchi, Jharkhand",
+    "realtime_min": 8.8,
+    "freeflow_time": 7.3,
+    "traffic_delay_min": 1.5,
+    "delay_percent": 20.8,
+    "distance_km": 3.8,
+    "traffic_condition": "🟢",
+    "origin_lat": 23.3441,
+    "origin_lng": 85.3096,
+    "destination_lat": 23.3574,
+    "destination_lng": 85.3158,
+    "path": [
+      [23.3441, 85.3096],
+      [23.3476, 85.3108],
+      [23.3512, 85.3124],
+      [23.3545, 85.3142],
+      [23.3574, 85.3158]
+    ]
+  },
+  {
+    "date": "2025-01-05",
+    "departure_time": "09:00 AM",
+    "origin": "Harmu Chowk, Ranchi, Jharkhand",
+    "destination": "CM House, Ranchi, Jharkhand",
+    "realtime_min": 9.5,
+    "freeflow_time": 6.1,
+    "traffic_delay_min": 3.4,
+    "delay_percent": 55.5,
+    "distance_km": 3.8,
+    "traffic_condition": "🟡",
+    "origin_lat": 23.3574,
+    "origin_lng": 85.3158,
+    "destination_lat": 23.3441,
+    "destination_lng": 85.3096,
+    "path": [
+      [23.3574, 85.3158],
+      [23.3545, 85.3142],
+      [23.3512, 85.3124],
+      [23.3476, 85.3108],
+      [23.3441, 85.3096]
+    ]
+  },
+  {
+    "date": "2025-01-05",
+    "departure_time": "09:00 AM",
+    "origin": "Harmu Chowk, Ranchi, Jharkhand",
+    "destination": "HEC Gate, Ranchi, Jharkhand",
+    "realtime_min": 14.9,
+    "freeflow_time": 13.2,
+    "traffic_delay_min": 1.7,
+    "delay_percent": 12.8,
+    "distance_km": 8.7,
+    "traffic_condition": "🟢",
+    "origin_lat": 23.3574,
+    "origin_lng": 85.3158,
+    "destination_lat": 23.4013,
+    "destination_lng": 85.2785,
+    "path": [
+      [23.3574, 85.3158],
+      [23.3658, 85.3076],
+      [23.3734, 85.2982],
+      [23.3861, 85.2874],
+      [23.4013, 85.2785]
+    ]
+  },
+  {
+    "date": "2025-01-05",
+    "departure_time": "09:00 AM",
+    "origin": "Radium Road, Ranchi, Jharkhand",
+    "destination": "Albertekka Chowk, Ranchi, Jharkhand",
+    "realtime_min": 3.3,
+    "freeflow_time": 2.5,
+    "traffic_delay_min": 0.8,
+    "delay_percent": 30.7,
+    "distance_km": 1.4,
+    "traffic_condition": "🟡",
+    "origin_lat": 23.3716,
+    "origin_lng": 85.3251,
+    "destination_lat": 23.3746,
+    "destination_lng": 85.3278,
+    "path": [
+      [23.3716, 85.3251],
+      [23.3728, 85.3262],
+      [23.3739, 85.3271],
+      [23.3746, 85.3278]
+    ]
+  },
+  {
+    "date": "2025-01-05",
+    "departure_time": "09:00 AM",
+    "origin": "Rajbhawan Chowk, Ranchi, Jharkhand",
+    "destination": "Booty More Chowk, Ranchi, Jharkhand",
+    "realtime_min": 20.6,
+    "freeflow_time": 13.6,
+    "traffic_delay_min": 7.0,
+    "delay_percent": 51.2,
+    "distance_km": 6.8,
+    "traffic_condition": "🟡",
+    "origin_lat": 23.3818,
+    "origin_lng": 85.3185,
+    "destination_lat": 23.4125,
+    "destination_lng": 85.3063,
+    "path": [
+      [23.3818, 85.3185],
+      [23.3896, 85.3151],
+      [23.3984, 85.3112],
+      [23.4059, 85.3084],
+      [23.4125, 85.3063]
+    ]
+  },
+  {
+    "date": "2025-01-05",
+    "departure_time": "09:00 AM",
+    "origin": "Mecon Chowk, Ranchi, Jharkhand",
+    "destination": "Airport, Ranchi, Jharkhand",
+    "realtime_min": 17.0,
+    "freeflow_time": 14.2,
+    "traffic_delay_min": 2.8,
+    "delay_percent": 19.7,
+    "distance_km": 7.6,
+    "traffic_condition": "🟢",
+    "origin_lat": 23.3439,
+    "origin_lng": 85.2874,
+    "destination_lat": 23.3145,
+    "destination_lng": 85.3216,
+    "path": [
+      [23.3439, 85.2874],
+      [23.3367, 85.2956],
+      [23.3294, 85.3048],
+      [23.3221, 85.3149],
+      [23.3145, 85.3216]
+    ]
+  }
+]

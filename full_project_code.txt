@@ -1,0 +1,957 @@
+
+==================================================
+FILE PATH: .\README.md
+==================================================
+
+
+
+==================================================
+FILE PATH: .\backend\package.json
+==================================================
+
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^5.2.1"
+  }
+}
+
+
+==================================================
+FILE PATH: .\backend\server.js
+==================================================
+
+const express = require('express');
+const cors = require('cors');
+
+const trafficRoutes = require('./routes/trafficRoutes');
+
+const app = express();
+app.use(cors());
+app.use(express.json());
+
+app.use('/api/traffic', trafficRoutes);
+
+const PORT = 5000;
+
+app.listen(PORT, () => {
+    console.log(`✅ Backend running on http://localhost:${PORT}`);
+});
+
+
+==================================================
+FILE PATH: .\backend\data\traffic-log.json
+==================================================
+
+[
+  {
+    "date": "2025-01-05",
+    "departure_time": "09:00 AM",
+    "origin": "CM House, Ranchi, Jharkhand",
+    "destination": "Harmu Chowk, Ranchi, Jharkhand",
+    "realtime_min": 8.8,
+    "freeflow_time": 7.3,
+    "traffic_delay_min": 1.5,
+    "delay_percent": 20.8,
+    "distance_km": 3.8,
+    "traffic_condition": "🟢",
+    "origin_lat": 23.3441,
+    "origin_lng": 85.3096,
+    "destination_lat": 23.3574,
+    "destination_lng": 85.3158,
+    "path": [
+      [23.3441, 85.3096],
+      [23.3476, 85.3108],
+      [23.3512, 85.3124],
+      [23.3545, 85.3142],
+      [23.3574, 85.3158]
+    ]
+  },
+  {
+    "date": "2025-01-05",
+    "departure_time": "09:00 AM",
+    "origin": "Harmu Chowk, Ranchi, Jharkhand",
+    "destination": "CM House, Ranchi, Jharkhand",
+    "realtime_min": 9.5,
+    "freeflow_time": 6.1,
+    "traffic_delay_min": 3.4,
+    "delay_percent": 55.5,
+    "distance_km": 3.8,
+    "traffic_condition": "🟡",
+    "origin_lat": 23.3574,
+    "origin_lng": 85.3158,
+    "destination_lat": 23.3441,
+    "destination_lng": 85.3096,
+    "path": [
+      [23.3574, 85.3158],
+      [23.3545, 85.3142],
+      [23.3512, 85.3124],
+      [23.3476, 85.3108],
+      [23.3441, 85.3096]
+    ]
+  },
+  {
+    "date": "2025-01-05",
+    "departure_time": "09:00 AM",
+    "origin": "Harmu Chowk, Ranchi, Jharkhand",
+    "destination": "HEC Gate, Ranchi, Jharkhand",
+    "realtime_min": 14.9,
+    "freeflow_time": 13.2,
+    "traffic_delay_min": 1.7,
+    "delay_percent": 12.8,
+    "distance_km": 8.7,
+    "traffic_condition": "🟢",
+    "origin_lat": 23.3574,
+    "origin_lng": 85.3158,
+    "destination_lat": 23.4013,
+    "destination_lng": 85.2785,
+    "path": [
+      [23.3574, 85.3158],
+      [23.3658, 85.3076],
+      [23.3734, 85.2982],
+      [23.3861, 85.2874],
+      [23.4013, 85.2785]
+    ]
+  },
+  {
+    "date": "2025-01-05",
+    "departure_time": "09:00 AM",
+    "origin": "Radium Road, Ranchi, Jharkhand",
+    "destination": "Albertekka Chowk, Ranchi, Jharkhand",
+    "realtime_min": 3.3,
+    "freeflow_time": 2.5,
+    "traffic_delay_min": 0.8,
+    "delay_percent": 30.7,
+    "distance_km": 1.4,
+    "traffic_condition": "🟡",
+    "origin_lat": 23.3716,
+    "origin_lng": 85.3251,
+    "destination_lat": 23.3746,
+    "destination_lng": 85.3278,
+    "path": [
+      [23.3716, 85.3251],
+      [23.3728, 85.3262],
+      [23.3739, 85.3271],
+      [23.3746, 85.3278]
+    ]
+  },
+  {
+    "date": "2025-01-05",
+    "departure_time": "09:00 AM",
+    "origin": "Rajbhawan Chowk, Ranchi, Jharkhand",
+    "destination": "Booty More Chowk, Ranchi, Jharkhand",
+    "realtime_min": 20.6,
+    "freeflow_time": 13.6,
+    "traffic_delay_min": 7.0,
+    "delay_percent": 51.2,
+    "distance_km": 6.8,
+    "traffic_condition": "🟡",
+    "origin_lat": 23.3818,
+    "origin_lng": 85.3185,
+    "destination_lat": 23.4125,
+    "destination_lng": 85.3063,
+    "path": [
+      [23.3818, 85.3185],
+      [23.3896, 85.3151],
+      [23.3984, 85.3112],
+      [23.4059, 85.3084],
+      [23.4125, 85.3063]
+    ]
+  },
+  {
+    "date": "2025-01-05",
+    "departure_time": "09:00 AM",
+    "origin": "Mecon Chowk, Ranchi, Jharkhand",
+    "destination": "Airport, Ranchi, Jharkhand",
+    "realtime_min": 17.0,
+    "freeflow_time": 14.2,
+    "traffic_delay_min": 2.8,
+    "delay_percent": 19.7,
+    "distance_km": 7.6,
+    "traffic_condition": "🟢",
+    "origin_lat": 23.3439,
+    "origin_lng": 85.2874,
+    "destination_lat": 23.3145,
+    "destination_lng": 85.3216,
+    "path": [
+      [23.3439, 85.2874],
+      [23.3367, 85.2956],
+      [23.3294, 85.3048],
+      [23.3221, 85.3149],
+      [23.3145, 85.3216]
+    ]
+  }
+]
+
+
+==================================================
+FILE PATH: .\backend\routes\trafficRoutes.js
+==================================================
+
+const express = require('express');
+const router = express.Router();
+
+const { readTrafficData } = require('../utils/readTrafficData');
+
+/**
+ * GET /api/traffic/all
+ */
+router.get('/all', (req, res) => {
+    try {
+        const data = readTrafficData();
+        res.json(data);
+    } catch (err) {
+        res.status(500).json({ error: 'Failed to read traffic data' });
+    }
+});
+
+/**
+ * GET /api/traffic/latest
+ */
+router.get('/latest', (req, res) => {
+    try {
+        const data = readTrafficData();
+        const latestByRoute = {};
+
+        data.forEach(entry => {
+            const key = `${entry.origin}__${entry.destination}`;
+            latestByRoute[key] = entry;
+        });
+
+        res.json(Object.values(latestByRoute));
+    } catch (err) {
+        res.status(500).json({ error: 'Failed to compute latest traffic' });
+    }
+});
+
+/**
+ * GET /api/traffic/top-congested
+ */
+router.get('/top-congested', (req, res) => {
+    try {
+        const data = readTrafficData();
+
+        // Step 1: latest record per route
+        const latestByRoute = {};
+        data.forEach(entry => {
+            const key = `${entry.origin}__${entry.destination}`;
+            latestByRoute[key] = entry;
+        });
+
+        // Step 2: sort by delay percentage
+        const sorted = Object.values(latestByRoute).sort(
+            (a, b) => b.delay_percent - a.delay_percent
+        );
+
+        // Step 3: return top 5
+        res.json(sorted.slice(0, 5));
+    } catch (err) {
+        res.status(500).json({ error: 'Failed to compute top congested routes' });
+    }
+});
+
+module.exports = router;
+
+
+==================================================
+FILE PATH: .\backend\utils\readTrafficData.js
+==================================================
+
+const fs = require('fs');
+const path = require('path');
+
+const DATA_PATH = path.join(__dirname, '../data/traffic-log.json');
+
+function readTrafficData() {
+    const raw = fs.readFileSync(DATA_PATH, 'utf-8');
+    return JSON.parse(raw);
+}
+
+module.exports = { readTrafficData };
+
+
+==================================================
+FILE PATH: .\frontend\.gitignore
+==================================================
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+
+==================================================
+FILE PATH: .\frontend\eslint.config.js
+==================================================
+
+import js from '@eslint/js'
+import globals from 'globals'
+import reactHooks from 'eslint-plugin-react-hooks'
+import reactRefresh from 'eslint-plugin-react-refresh'
+import { defineConfig, globalIgnores } from 'eslint/config'
+
+export default defineConfig([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{js,jsx}'],
+    extends: [
+      js.configs.recommended,
+      reactHooks.configs.flat.recommended,
+      reactRefresh.configs.vite,
+    ],
+    languageOptions: {
+      ecmaVersion: 2020,
+      globals: globals.browser,
+      parserOptions: {
+        ecmaVersion: 'latest',
+        ecmaFeatures: { jsx: true },
+        sourceType: 'module',
+      },
+    },
+    rules: {
+      'no-unused-vars': ['error', { varsIgnorePattern: '^[A-Z_]' }],
+    },
+  },
+])
+
+
+==================================================
+FILE PATH: .\frontend\index.html
+==================================================
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>frontend</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
+
+
+==================================================
+FILE PATH: .\frontend\package.json
+==================================================
+
+{
+  "name": "frontend",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint .",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "leaflet": "^1.9.4",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "react-leaflet": "^5.0.0",
+    "react-router-dom": "^7.11.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.1",
+    "@types/react": "^19.2.5",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^5.1.1",
+    "eslint": "^9.39.1",
+    "eslint-plugin-react-hooks": "^7.0.1",
+    "eslint-plugin-react-refresh": "^0.4.24",
+    "globals": "^16.5.0",
+    "vite": "^7.2.4"
+  }
+}
+
+
+==================================================
+FILE PATH: .\frontend\README.md
+==================================================
+
+# React + Vite
+
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+
+Currently, two official plugins are available:
+
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+
+## React Compiler
+
+The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+
+## Expanding the ESLint configuration
+
+If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+
+
+==================================================
+FILE PATH: .\frontend\vite.config.js
+==================================================
+
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+
+// https://vite.dev/config/
+export default defineConfig({
+  plugins: [react()],
+})
+
+
+==================================================
+FILE PATH: .\frontend\src\App.css
+==================================================
+
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+
+
+==================================================
+FILE PATH: .\frontend\src\App.jsx
+==================================================
+
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Dashboard from './pages/Dashboard';
+
+function App() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Dashboard />} />
+      </Routes>
+    </BrowserRouter>
+  );
+}
+
+export default App;
+
+
+==================================================
+FILE PATH: .\frontend\src\index.css
+==================================================
+
+:root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+}
+a:hover {
+  color: #535bf2;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #1a1a1a;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+button:hover {
+  border-color: #646cff;
+}
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+}
+
+
+==================================================
+FILE PATH: .\frontend\src\main.jsx
+==================================================
+
+import { StrictMode } from 'react'
+import { createRoot } from 'react-dom/client'
+import './index.css'
+import App from './App.jsx'
+import 'leaflet/dist/leaflet.css';
+
+createRoot(document.getElementById('root')).render(
+  <StrictMode>
+    <App />
+  </StrictMode>,
+)
+
+
+==================================================
+FILE PATH: .\frontend\src\components\Legend.jsx
+==================================================
+
+export default function Legend() {
+  return (
+    <div style={{
+      background: '#fff',
+      padding: '8px',
+      borderRadius: '6px',
+      fontSize: '12px',
+      marginTop: '12px'
+    }}>
+      <strong>Traffic Status</strong>
+      <div>🟢 Normal (&lt;25%)</div>
+      <div>🟡 Moderate (25–60%)</div>
+      <div>🔴 Heavy (&gt;60%)</div>
+    </div>
+  );
+}
+
+
+==================================================
+FILE PATH: .\frontend\src\components\MapView.jsx
+==================================================
+
+import { MapContainer, TileLayer, Polyline } from 'react-leaflet';
+
+const center = [23.3441, 85.3096]; // Ranchi
+
+function getRouteColor(condition) {
+  if (condition === '🔴') return 'red';
+  if (condition === '🟡') return 'orange';
+  return 'green';
+}
+
+export default function MapView({ routes }) {
+  return (
+    <MapContainer
+      center={center}
+      zoom={12}
+      style={{ height: '75vh', width: '100%' }}
+    >
+      <TileLayer
+        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        attribution="© OpenStreetMap contributors"
+      />
+
+      {routes.map((r, idx) => (
+  <Polyline
+    key={idx}
+    positions={r.path}
+    pathOptions={{
+      color: getRouteColor(r.traffic_condition),
+      weight: 6,
+      opacity: 0.9
+    }}
+  />
+))}
+
+    </MapContainer>
+  );
+}
+
+
+==================================================
+FILE PATH: .\frontend\src\components\RouteDetails.jsx
+==================================================
+
+export default function RouteDetails({ route }) {
+  if (!route) return null;
+
+  return (
+    <>
+      <h3>Route Details</h3>
+      <div style={{
+        background: '#fff',
+        padding: '10px',
+        borderRadius: '6px'
+      }}>
+        <p><strong>{route.origin}</strong></p>
+        <p>→ {route.destination}</p>
+        <p>Delay: {route.delay_percent}%</p>
+        <p>Distance: {route.distance_km} km</p>
+        <p>Current Time: {route.realtime_min} min</p>
+      </div>
+    </>
+  );
+}
+
+
+==================================================
+FILE PATH: .\frontend\src\components\StatusBar.jsx
+==================================================
+
+function Stat({ label, value, color = '#0f172a' }) {
+  return (
+    <div style={{
+      flex: 1,
+      background: '#ffffff',
+      padding: '12px',
+      borderRadius: '6px',
+      border: '1px solid #cbd5e1',
+      borderLeft: `6px solid ${color}`
+    }}>
+      <div style={{ fontSize: '12px', color: '#475569' }}>{label}</div>
+      <div style={{ fontSize: '22px', fontWeight: 600 }}>{value}</div>
+    </div>
+  );
+}
+
+
+==================================================
+FILE PATH: .\frontend\src\components\TopCongested.jsx
+==================================================
+
+export default function TopCongested({ routes, onSelect }) {
+  const top = [...routes]
+    .sort((a, b) => b.delay_percent - a.delay_percent)
+    .slice(0, 5);
+
+  return (
+    <>
+      <h3>Top Congested Routes</h3>
+      {top.map((r, i) => (
+        <div
+          key={i}
+          onClick={() => onSelect(r)}
+          style={{
+            padding: '8px',
+            marginBottom: '8px',
+            background: '#fff',
+            borderRadius: '6px',
+            cursor: 'pointer',
+            borderLeft: `6px solid ${
+              r.traffic_condition === '🔴' ? '#dc2626' :
+              r.traffic_condition === '🟡' ? '#f59e0b' : '#16a34a'
+            }`
+          }}
+        >
+          <strong>{r.origin}</strong>
+          <div style={{ fontSize: '12px' }}>→ {r.destination}</div>
+          <div style={{ fontSize: '12px' }}>Delay: {r.delay_percent}%</div>
+        </div>
+      ))}
+    </>
+  );
+}
+
+
+==================================================
+FILE PATH: .\frontend\src\pages\Dashboard.jsx
+==================================================
+
+import { useEffect, useState } from 'react';
+import MapView from '../components/MapView';
+import TopCongested from '../components/TopCongested';
+import RouteDetails from '../components/RouteDetails';
+import StatusBar from '../components/StatusBar';
+import Legend from '../components/Legend';
+
+export default function Dashboard() {
+  const [routes, setRoutes] = useState([]);
+  const [selected, setSelected] = useState(null);
+
+  useEffect(() => {
+    fetch('http://localhost:5000/api/traffic/latest')
+      .then(res => res.json())
+      .then(data => setRoutes(data));
+  }, []);
+
+  return (
+    <div style={{
+      height: '100vh',
+      background: '#f1f5f9',
+      color: '#0f172a',
+      display: 'flex',
+      flexDirection: 'column'
+    }}>
+      
+      {/* HEADER */}
+      <div style={{
+        padding: '16px 24px',
+        background: '#ffffff',
+        borderBottom: '1px solid #cbd5e1'
+      }}>
+        <h2 style={{ margin: 0, fontSize: '20px' }}>
+          AI Traffic Intelligence Dashboard
+        </h2>
+        <div style={{ fontSize: '13px', color: '#475569' }}>
+          Ranchi City · Morning Peak Monitoring (Pilot)
+        </div>
+      </div>
+
+      {/* MAIN CONTENT */}
+      <div style={{
+        flex: 1,
+        display: 'flex',
+        overflow: 'hidden'
+      }}>
+        
+        {/* MAP SECTION */}
+        <div style={{
+          flex: 7,
+          borderRight: '1px solid #cbd5e1'
+        }}>
+          <MapView routes={routes} onSelect={setSelected} />
+        </div>
+
+        {/* RIGHT PANEL */}
+        <div style={{
+          flex: 3,
+          padding: '16px',
+          overflowY: 'auto',
+          background: '#f8fafc'
+        }}>
+          <StatusBar routes={routes} />
+          <TopCongested routes={routes} onSelect={setSelected} />
+          <RouteDetails route={selected} />
+          <Legend />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+
+==================================================
+FILE PATH: .\frontend\src\services\trafficApi.js
+==================================================
+
+
+
+==================================================
+FILE PATH: .\traffic-engine\.env
+==================================================
+
+GOOGLE_MAPS_API_KEY=your_api_key_here
+
+
+==================================================
+FILE PATH: .\traffic-engine\index.js
+==================================================
+
+import fetch from 'node-fetch';
+import fs from 'fs';
+import dotenv from 'dotenv';
+import locations from './locations.js';
+
+dotenv.config();
+
+const API_KEY = process.env.GOOGLE_MAPS_API_KEY;
+const URL = 'https://routes.googleapis.com/directions/v2:computeRoutes';
+
+function parseDuration(str) {
+    if (str.endsWith('s')) return parseInt(str);
+    const m = str.match(/PT(?:(\d+)M)?(?:(\d+)S)?/);
+    return (parseInt(m[1] || 0) * 60) + parseInt(m[2] || 0);
+}
+
+async function run() {
+    for (const route of locations) {
+        const body = {
+            origin: route.origin,
+            destination: route.destination,
+            travelMode: "DRIVE",
+            routingPreference: "TRAFFIC_AWARE_OPTIMAL",
+            departureTime: new Date(Date.now() + 300000).toISOString()
+        };
+
+        const res = await fetch(URL, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-Goog-Api-Key': API_KEY,
+                'X-Goog-FieldMask': 'routes.duration,routes.distanceMeters'
+            },
+            body: JSON.stringify(body)
+        });
+
+        const data = await res.json();
+        const rt = parseDuration(data.routes[0].duration);
+        const delay = ((rt - route.freeflow_time * 60) / (route.freeflow_time * 60) * 100).toFixed(1);
+
+        const log = {
+            time: new Date().toISOString(),
+            origin: route.origin.address,
+            destination: route.destination.address,
+            delay_percent: delay
+        };
+
+        fs.appendFileSync('traffic-log.json', JSON.stringify(log) + '\n');
+        console.log(log);
+    }
+}
+
+run();
+
+
+==================================================
+FILE PATH: .\traffic-engine\locations.js
+==================================================
+
+module.exports = [
+    {
+        origin: {
+            address: "Main Road, Ranchi",
+            lat: 23.3441,
+            lng: 85.3096
+        },
+        destination: {
+            address: "Birsa Chowk, Ranchi",
+            lat: 23.2987,
+            lng: 85.3041
+        },
+        freeflow_time: 12
+    }
+];
+
+
+==================================================
+FILE PATH: .\traffic-engine\mock-data.json
+==================================================
+
+
+
+==================================================
+FILE PATH: .\traffic-engine\package.json
+==================================================
+
+{
+  "name": "traffic-engine",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "dotenv": "^17.2.3",
+    "node-fetch": "^3.3.2"
+  }
+}
+
+
+==================================================
+FILE PATH: .\traffic-engine\traffic-log.json
+==================================================
+
+{"date":"2025-01-05","departure_time":"09:00 AM","origin":"CM House, Ranchi, Jharkhand","destination":"Harmu Chowk, Ranchi, Jharkhand","realtime_min":8.8,"freeflow_time":7.3,"traffic_delay_min":1.5,"delay_percent":20.8,"distance_km":3.8,"traffic_condition":"🟢","origin_lat":23.3441,"origin_lng":85.3096,"destination_lat":23.3574,"destination_lng":85.3158}
+{"date":"2025-01-05","departure_time":"09:00 AM","origin":"Harmu Chowk, Ranchi, Jharkhand","destination":"CM House, Ranchi, Jharkhand","realtime_min":9.5,"freeflow_time":6.1,"traffic_delay_min":3.4,"delay_percent":55.5,"distance_km":3.8,"traffic_condition":"🟡","origin_lat":23.3574,"origin_lng":85.3158,"destination_lat":23.3441,"destination_lng":85.3096}
+{"date":"2025-01-05","departure_time":"09:00 AM","origin":"Harmu Chowk, Ranchi, Jharkhand","destination":"HEC Gate, Ranchi, Jharkhand","realtime_min":14.9,"freeflow_time":13.2,"traffic_delay_min":1.7,"delay_percent":12.8,"distance_km":8.7,"traffic_condition":"🟢","origin_lat":23.3574,"origin_lng":85.3158,"destination_lat":23.4013,"destination_lng":85.2785}
+{"date":"2025-01-05","departure_time":"09:00 AM","origin":"HEC Gate, Ranchi, Jharkhand","destination":"Harmu Chowk, Ranchi, Jharkhand","realtime_min":16.4,"freeflow_time":13.5,"traffic_delay_min":2.9,"delay_percent":21.1,"distance_km":8.7,"traffic_condition":"🟢","origin_lat":23.4013,"origin_lng":85.2785,"destination_lat":23.3574,"destination_lng":85.3158}
+{"date":"2025-01-05","departure_time":"09:00 AM","origin":"Radium Road, Ranchi, Jharkhand","destination":"Albertekka Chowk, Ranchi, Jharkhand","realtime_min":3.3,"freeflow_time":2.5,"traffic_delay_min":0.8,"delay_percent":30.7,"distance_km":1.4,"traffic_condition":"🟡","origin_lat":23.3716,"origin_lng":85.3251,"destination_lat":23.3746,"destination_lng":85.3278}
+{"date":"2025-01-05","departure_time":"09:00 AM","origin":"Albertekka Chowk, Ranchi, Jharkhand","destination":"Rajendra Chowk, Ranchi, Jharkhand","realtime_min":7.4,"freeflow_time":5.9,"traffic_delay_min":1.5,"delay_percent":25.1,"distance_km":3.0,"traffic_condition":"🟡","origin_lat":23.3746,"origin_lng":85.3278,"destination_lat":23.3789,"destination_lng":85.3182}
+{"date":"2025-01-05","departure_time":"09:00 AM","origin":"Rajbhawan Chowk, Ranchi, Jharkhand","destination":"Booty More Chowk, Ranchi, Jharkhand","realtime_min":20.6,"freeflow_time":13.6,"traffic_delay_min":7.0,"delay_percent":51.2,"distance_km":6.8,"traffic_condition":"🟡","origin_lat":23.3818,"origin_lng":85.3185,"destination_lat":23.4125,"destination_lng":85.3063}
+{"date":"2025-01-05","departure_time":"09:00 AM","origin":"Mecon Chowk, Ranchi, Jharkhand","destination":"Airport, Ranchi, Jharkhand","realtime_min":17.0,"freeflow_time":14.2,"traffic_delay_min":2.8,"delay_percent":19.7,"distance_km":7.6,"traffic_condition":"🟢","origin_lat":23.3439,"origin_lng":85.2874,"destination_lat":23.3145,"destination_lng":85.3216}
+
