@@ -12,13 +12,24 @@ export default function Dashboard() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch('http://localhost:5000/api/traffic/latest')
+    // ---------------------------------------------------------
+    // CHANGE IS HERE: Dynamic URL selection
+    // ---------------------------------------------------------
+    // 1. Tries to read the Vercel environment variable first.
+    // 2. If it doesn't exist (like on your laptop), defaults to localhost.
+    const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+    
+    // Safety check: remove trailing slash if present to avoid errors like "com//api"
+    const cleanUrl = API_URL.replace(/\/$/, '');
+
+    fetch(`${cleanUrl}/api/traffic/latest`)
       .then((res) => res.json())
       .then((data) => {
         setRoutes(data);
         setLoading(false);
       })
-      .catch(() => {
+      .catch((err) => {
+        console.error("Failed to fetch traffic data:", err);
         setError('Failed to load traffic data');
         setLoading(false);
       });
