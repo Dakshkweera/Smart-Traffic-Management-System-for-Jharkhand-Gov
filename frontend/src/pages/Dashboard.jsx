@@ -39,25 +39,48 @@ export default function Dashboard() {
     <div
       style={{
         height: '100vh',
-        background: '#f1f5f9',
+        width: '100vw',
+        background: '#eef2f6',
         color: '#0f172a',
         display: 'flex',
-        flexDirection: 'column'
+        flexDirection: 'column',
+        fontFamily: "'Segoe UI', system-ui, -apple-system, sans-serif"
       }}
     >
       {/* HEADER */}
       <div
         style={{
-          padding: '16px 24px',
-          background: '#ffffff',
-          borderBottom: '1px solid #cbd5e1'
+          padding: '14px 28px',
+          background: '#0f3d5c',
+          color: '#ffffff',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          boxShadow: '0 2px 6px rgba(0,0,0,0.15)',
+          zIndex: 10
         }}
       >
-        <h2 style={{ margin: 0, fontSize: '20px' }}>
-          AI Traffic Intelligence Dashboard
-        </h2>
-        <div style={{ fontSize: '13px', color: '#475569' }}>
-          Ranchi City · Morning Peak Monitoring (Pilot)
+        <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
+          <div style={{ fontSize: '28px', lineHeight: 1 }}>🚦</div>
+          <div>
+            <h1 style={{ margin: 0, fontSize: '19px', fontWeight: 600, letterSpacing: '0.2px' }}>
+              AI Traffic Intelligence Dashboard
+            </h1>
+            <div style={{ fontSize: '12.5px', color: '#cbd8e3', marginTop: '2px' }}>
+              Government of Jharkhand · Ranchi City Pilot
+            </div>
+          </div>
+        </div>
+        <div
+          style={{
+            fontSize: '12px',
+            background: 'rgba(255,255,255,0.12)',
+            padding: '6px 12px',
+            borderRadius: '20px',
+            border: '1px solid rgba(255,255,255,0.25)'
+          }}
+        >
+          ● Live Monitoring
         </div>
       </div>
 
@@ -73,7 +96,8 @@ export default function Dashboard() {
         <div
           style={{
             flex: 7,
-            borderRight: '1px solid #cbd5e1'
+            position: 'relative',
+            background: '#e2e8f0'
           }}
         >
           {loading || error ? (
@@ -82,7 +106,9 @@ export default function Dashboard() {
                 height: '100%',
                 display: 'flex',
                 alignItems: 'center',
-                justifyContent: 'center'
+                justifyContent: 'center',
+                color: '#475569',
+                fontSize: '14px'
               }}
             >
               {loading ? 'Loading traffic data…' : error}
@@ -100,13 +126,16 @@ export default function Dashboard() {
         <div
           style={{
             flex: 3,
-            padding: '16px',
+            minWidth: '360px',
+            maxWidth: '440px',
+            padding: '20px',
             overflowY: 'auto',
-            background: '#f8fafc'
+            background: '#f8fafc',
+            borderLeft: '1px solid #dbe2ea'
           }}
         >
           <StatusBar routes={routes} />
-          <TopCongested routes={routes} onSelect={setSelected} />
+          <TopCongested routes={routes} onSelect={setSelected} selected={selected} />
           <RouteDetails route={selected} />
           <Legend />
         </div>
