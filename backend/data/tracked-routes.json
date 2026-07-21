@@ -1,0 +1,26 @@
+[
+  {
+    "origin": "CM House, Ranchi, Jharkhand",
+    "destination": "Harmu Chowk, Ranchi, Jharkhand"
+  },
+  {
+    "origin": "Harmu Chowk, Ranchi, Jharkhand",
+    "destination": "CM House, Ranchi, Jharkhand"
+  },
+  {
+    "origin": "Harmu Chowk, Ranchi, Jharkhand",
+    "destination": "HEC Gate, Ranchi, Jharkhand"
+  },
+  {
+    "origin": "Radium Road, Ranchi, Jharkhand",
+    "destination": "Albertekka Chowk, Ranchi, Jharkhand"
+  },
+  {
+    "origin": "Rajbhawan Chowk, Ranchi, Jharkhand",
+    "destination": "Booty More Chowk, Ranchi, Jharkhand"
+  },
+  {
+    "origin": "Mecon Chowk, Ranchi, Jharkhand",
+    "destination": "Airport, Ranchi, Jharkhand"
+  }
+]

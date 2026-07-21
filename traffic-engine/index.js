@@ -32,6 +32,39 @@ function classifyCondition(delayPercent) {
   return '🔴';
 }
 
+// Decodes Google's encoded polyline format into [lat, lng] pairs
+function decodePolyline(encoded) {
+  const points = [];
+  let index = 0;
+  let lat = 0;
+  let lng = 0;
+
+  while (index < encoded.length) {
+    let shift = 0;
+    let result = 0;
+    let byte;
+    do {
+      byte = encoded.charCodeAt(index++) - 63;
+      result |= (byte & 0x1f) << shift;
+      shift += 5;
+    } while (byte >= 0x20);
+    lat += result & 1 ? ~(result >> 1) : result >> 1;
+
+    shift = 0;
+    result = 0;
+    do {
+      byte = encoded.charCodeAt(index++) - 63;
+      result |= (byte & 0x1f) << shift;
+      shift += 5;
+    } while (byte >= 0x20);
+    lng += result & 1 ? ~(result >> 1) : result >> 1;
+
+    points.push([lat / 1e5, lng / 1e5]);
+  }
+
+  return points;
+}
+
 function ensureOutputFile() {
   if (!fs.existsSync(OUTPUT_FILE)) {
     fs.writeFileSync(OUTPUT_FILE, '[]', 'utf-8');
@@ -110,6 +143,14 @@ async function run() {
 
       const trafficCondition = classifyCondition(delayPercent);
 
+      const encodedPolyline = routeData.polyline?.encodedPolyline;
+      const path = encodedPolyline
+        ? decodePolyline(encodedPolyline)
+        : [
+            [route.origin.lat, route.origin.lng],
+            [route.destination.lat, route.destination.lng]
+          ];
+
       const now = new Date();
       const entry = {
         time: now.toISOString(),
@@ -129,10 +170,7 @@ async function run() {
         origin_lng: route.origin.lng,
         destination_lat: route.destination.lat,
         destination_lng: route.destination.lng,
-        path: [
-          [route.origin.lat, route.origin.lng],
-          [route.destination.lat, route.destination.lng]
-        ]
+        path
       };
 
       appendEntry(entry);
@@ -143,4 +181,11 @@ async function run() {
   }
 }
 
+const INTERVAL_MINUTES = Number(process.env.RUN_INTERVAL_MINUTES) || 0;
+
 run();
+
+if (INTERVAL_MINUTES > 0) {
+  console.log(`Scheduled to refresh every ${INTERVAL_MINUTES} minute(s).`);
+  setInterval(run, INTERVAL_MINUTES * 60 * 1000);
+}

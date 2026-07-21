@@ -1,0 +1,184 @@
+[
+  {
+    "origin": {
+      "address": "CM House, Ranchi, Jharkhand",
+      "lat": 23.3441,
+      "lng": 85.3096
+    },
+    "destination": {
+      "address": "Harmu Chowk, Ranchi, Jharkhand",
+      "lat": 23.3574,
+      "lng": 85.3158
+    },
+    "freeflow_time": 7.3,
+    "distance_km": 3.8
+  },
+  {
+    "origin": {
+      "address": "Harmu Chowk, Ranchi, Jharkhand",
+      "lat": 23.3574,
+      "lng": 85.3158
+    },
+    "destination": {
+      "address": "CM House, Ranchi, Jharkhand",
+      "lat": 23.3441,
+      "lng": 85.3096
+    },
+    "freeflow_time": 6.1,
+    "distance_km": 3.8
+  },
+  {
+    "origin": {
+      "address": "Harmu Chowk, Ranchi, Jharkhand",
+      "lat": 23.3574,
+      "lng": 85.3158
+    },
+    "destination": {
+      "address": "HEC Gate, Ranchi, Jharkhand",
+      "lat": 23.4013,
+      "lng": 85.2785
+    },
+    "freeflow_time": 13.2,
+    "distance_km": 8.7
+  },
+  {
+    "origin": {
+      "address": "Radium Road, Ranchi, Jharkhand",
+      "lat": 23.3716,
+      "lng": 85.3251
+    },
+    "destination": {
+      "address": "Albertekka Chowk, Ranchi, Jharkhand",
+      "lat": 23.3746,
+      "lng": 85.3278
+    },
+    "freeflow_time": 2.5,
+    "distance_km": 1.4
+  },
+  {
+    "origin": {
+      "address": "Rajbhawan Chowk, Ranchi, Jharkhand",
+      "lat": 23.3818,
+      "lng": 85.3185
+    },
+    "destination": {
+      "address": "Booty More Chowk, Ranchi, Jharkhand",
+      "lat": 23.4125,
+      "lng": 85.3063
+    },
+    "freeflow_time": 13.6,
+    "distance_km": 6.8
+  },
+  {
+    "origin": {
+      "address": "Mecon Chowk, Ranchi, Jharkhand",
+      "lat": 23.3439,
+      "lng": 85.2874
+    },
+    "destination": {
+      "address": "Airport, Ranchi, Jharkhand",
+      "lat": 23.3145,
+      "lng": 85.3216
+    },
+    "freeflow_time": 14.2,
+    "distance_km": 7.6
+  },
+  {
+    "origin": {
+      "address": "BIT Mesra, Ranchi, Jharkhand",
+      "lat": 23.4176,
+      "lng": 85.4394
+    },
+    "destination": {
+      "address": "CM House, Ranchi, Jharkhand",
+      "lat": 23.3441,
+      "lng": 85.3096
+    },
+    "freeflow_time": 27.4,
+    "distance_km": 19.2
+  },
+  {
+    "origin": {
+      "address": "BIT Mesra, Ranchi, Jharkhand",
+      "lat": 23.4176,
+      "lng": 85.4394
+    },
+    "destination": {
+      "address": "Harmu Chowk, Ranchi, Jharkhand",
+      "lat": 23.3574,
+      "lng": 85.3158
+    },
+    "freeflow_time": 26.5,
+    "distance_km": 18.2
+  },
+  {
+    "origin": {
+      "address": "BIT Mesra, Ranchi, Jharkhand",
+      "lat": 23.4176,
+      "lng": 85.4394
+    },
+    "destination": {
+      "address": "HEC Gate, Ranchi, Jharkhand",
+      "lat": 23.4013,
+      "lng": 85.2785
+    },
+    "freeflow_time": 31.8,
+    "distance_km": 22.9
+  },
+  {
+    "origin": {
+      "address": "BIT Mesra, Ranchi, Jharkhand",
+      "lat": 23.4176,
+      "lng": 85.4394
+    },
+    "destination": {
+      "address": "Rajbhawan Chowk, Ranchi, Jharkhand",
+      "lat": 23.3818,
+      "lng": 85.3185
+    },
+    "freeflow_time": 22.8,
+    "distance_km": 16.2
+  },
+  {
+    "origin": {
+      "address": "BIT Mesra, Ranchi, Jharkhand",
+      "lat": 23.4176,
+      "lng": 85.4394
+    },
+    "destination": {
+      "address": "Booty More Chowk, Ranchi, Jharkhand",
+      "lat": 23.4125,
+      "lng": 85.3063
+    },
+    "freeflow_time": 28.6,
+    "distance_km": 21
+  },
+  {
+    "origin": {
+      "address": "BIT Mesra, Ranchi, Jharkhand",
+      "lat": 23.4176,
+      "lng": 85.4394
+    },
+    "destination": {
+      "address": "Mecon Chowk, Ranchi, Jharkhand",
+      "lat": 23.3439,
+      "lng": 85.2874
+    },
+    "freeflow_time": 32,
+    "distance_km": 21.2
+  },
+  {
+    "origin": {
+      "address": "BIT Mesra, Ranchi, Jharkhand",
+      "lat": 23.4176,
+      "lng": 85.4394
+    },
+    "destination": {
+      "address": "Airport, Ranchi, Jharkhand",
+      "lat": 23.3145,
+      "lng": 85.3216
+    },
+    "freeflow_time": 29.5,
+    "distance_km": 20.9
+  }
+]

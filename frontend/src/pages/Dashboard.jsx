@@ -1,39 +1,79 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import MapView from '../components/MapView';
 import TopCongested from '../components/TopCongested';
 import RouteDetails from '../components/RouteDetails';
 import StatusBar from '../components/StatusBar';
 import Legend from '../components/Legend';
+import RouteFinder from '../components/RouteFinder';
+
+// ---------------------------------------------------------
+// Dynamic URL selection: tries the Vercel env var first,
+// falls back to localhost for local dev.
+// ---------------------------------------------------------
+const API_URL = (import.meta.env.VITE_API_URL || 'http://localhost:5000').replace(/\/$/, '');
 
 export default function Dashboard() {
-  const [routes, setRoutes] = useState([]);
+  const [trackedRoutes, setTrackedRoutes] = useState([]);
+  const [allRoutes, setAllRoutes] = useState([]);
+  const [previewRoute, setPreviewRoute] = useState(null);
   const [selected, setSelected] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    // ---------------------------------------------------------
-    // CHANGE IS HERE: Dynamic URL selection
-    // ---------------------------------------------------------
-    // 1. Tries to read the Vercel environment variable first.
-    // 2. If it doesn't exist (like on your laptop), defaults to localhost.
-    const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
-    
-    // Safety check: remove trailing slash if present to avoid errors like "com//api"
-    const cleanUrl = API_URL.replace(/\/$/, '');
-
-    fetch(`${cleanUrl}/api/traffic/latest`)
+  const fetchTracked = useCallback(() => {
+    return fetch(`${API_URL}/api/traffic/tracked`)
       .then((res) => res.json())
       .then((data) => {
-        setRoutes(data);
+        setTrackedRoutes(data);
         setLoading(false);
+        setError(null);
       })
       .catch((err) => {
-        console.error("Failed to fetch traffic data:", err);
+        console.error('Failed to fetch tracked routes:', err);
         setError('Failed to load traffic data');
         setLoading(false);
       });
   }, []);
+
+  const fetchAll = useCallback(() => {
+    return fetch(`${API_URL}/api/traffic/latest`)
+      .then((res) => res.json())
+      .then(setAllRoutes)
+      .catch((err) => console.error('Failed to fetch full route list:', err));
+  }, []);
+
+  useEffect(() => {
+    fetchTracked();
+    fetchAll();
+  }, [fetchTracked, fetchAll]);
+
+  // After tracking a new route, drop the preview and go back to the home view
+  function handleTracked() {
+    setPreviewRoute(null);
+    fetchTracked();
+    fetchAll();
+  }
+
+  async function handleUntrack(route) {
+    if (!window.confirm(`Remove "${route.origin} → ${route.destination}" from home?`)) return;
+
+    try {
+      const res = await fetch(`${API_URL}/api/traffic/tracked`, {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ origin: route.origin, destination: route.destination })
+      });
+      if (!res.ok) throw new Error('Failed to remove route');
+      if (selected && selected.origin === route.origin && selected.destination === route.destination) {
+        setSelected(null);
+      }
+      fetchTracked();
+    } catch (err) {
+      alert(err.message);
+    }
+  }
+
+  const mapRoutes = previewRoute ? [previewRoute] : trackedRoutes;
 
   return (
     <div
@@ -115,8 +155,8 @@ export default function Dashboard() {
             </div>
           ) : (
             <MapView
-              routes={routes}
-              selected={selected}
+              routes={mapRoutes}
+              selected={selected || previewRoute}
               onSelect={setSelected}
             />
           )}
@@ -134,8 +174,19 @@ export default function Dashboard() {
             borderLeft: '1px solid #dbe2ea'
           }}
         >
-          <StatusBar routes={routes} />
-          <TopCongested routes={routes} onSelect={setSelected} selected={selected} />
+          <StatusBar routes={trackedRoutes} />
+          <RouteFinder
+            allRoutes={allRoutes}
+            apiUrl={API_URL}
+            onPreview={setPreviewRoute}
+            onTracked={handleTracked}
+          />
+          <TopCongested
+            routes={trackedRoutes}
+            onSelect={setSelected}
+            selected={selected}
+            onUntrack={handleUntrack}
+          />
           <RouteDetails route={selected} />
           <Legend />
         </div>

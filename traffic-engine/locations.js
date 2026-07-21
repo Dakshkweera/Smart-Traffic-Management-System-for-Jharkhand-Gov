@@ -1,19 +1,14 @@
-const locations = [
-  {
-    origin: {
-      address: 'CM House, Ranchi, Jharkhand',
-      lat: 23.3441,
-      lng: 85.3096
-    },
-    destination: {
-      address: 'Harmu Chowk, Ranchi, Jharkhand',
-      lat: 23.3574,
-      lng: 85.3158
-    },
-    freeflow_time: 7.3,
-    distance_km: 3.8
-  },
-  // add other OD pairs here...
-];
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+// Shared with the backend: adding/deleting a route from the dashboard
+// updates this same file, so the live-fetch engine monitors exactly the
+// routes visible on the dashboard, whether data is static or live.
+const locations = JSON.parse(
+  fs.readFileSync(path.join(__dirname, 'locations.json'), 'utf-8')
+);
 
 export default locations;
