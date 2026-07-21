@@ -1,7 +1,6 @@
 # 🚦 AI-Based Traffic Intelligence & Congestion Monitoring System
 
-**Jharkhand Pilot Project – Ranchi City**  
-*Smart India Hackathon 2025 Grand Finale*
+**Jharkhand Pilot Project – Ranchi City**
 
 ---
 
@@ -52,7 +51,7 @@ Current traffic monitoring in Jharkhand suffers from: [file:1]
 - Click-to-inspect route details
 - Realistic road-following paths (not straight lines)
 - OpenStreetMap integration for zero billing dependency [web:12]
-
+mn
 ### 📊 **Objective Congestion Metrics**
 - Quantitative delay percentage calculation
 - Three-tier severity classification (Normal/Moderate/Heavy)
