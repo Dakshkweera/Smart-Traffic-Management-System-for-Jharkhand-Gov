@@ -5,6 +5,7 @@ import RouteDetails from '../components/RouteDetails';
 import StatusBar from '../components/StatusBar';
 import Legend from '../components/Legend';
 import RouteFinder from '../components/RouteFinder';
+import AskAI from '../components/AskAI';
 
 // ---------------------------------------------------------
 // Dynamic URL selection: tries the Vercel env var first,
@@ -188,6 +189,7 @@ export default function Dashboard() {
             onUntrack={handleUntrack}
           />
           <RouteDetails route={selected} />
+          <AskAI apiUrl={API_URL} />
           <Legend />
         </div>
       </div>

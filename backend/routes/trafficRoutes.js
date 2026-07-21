@@ -349,4 +349,94 @@ router.delete('/', (req, res) => {
   }
 });
 
+/**
+ * POST /api/traffic/ask
+ * Natural-language Q&A over the current traffic snapshot, via Groq.
+ * Body: { question }
+ */
+router.post('/ask', async (req, res) => {
+  try {
+    const { question } = req.body;
+
+    if (!question || !question.trim()) {
+      return res.status(400).json({ error: 'question is required' });
+    }
+
+    const apiKey = process.env.GROQ_API_KEY;
+    if (!apiKey || apiKey === 'your_groq_api_key_here') {
+      return res.status(503).json({ error: 'GROQ_API_KEY is not configured on the server yet' });
+    }
+
+    const latestByRoute = getLatestByRoute(readTrafficData());
+    const snapshot = Object.values(latestByRoute)
+      .map(normalizeEntry)
+      .map(
+        (r) =>
+          `${r.origin} -> ${r.destination}: delay ${r.delay_percent}% (${r.traffic_condition}), ` +
+          `${r.distance_km} km, current travel time ${r.realtime_min} min, free-flow ${r.freeflow_time} min`
+      )
+      .join('\n');
+
+    const systemPrompt =
+      'You are a traffic control-room assistant for Ranchi, Jharkhand. ' +
+      'You will be given the current snapshot of monitored routes below. ' +
+      'Answer the operator\'s question using ONLY this data - never guess or invent numbers, ' +
+      'and if the question is about a route not listed, say it is not currently monitored.\n\n' +
+      'Severity levels: 🟢 Normal = delay under 25%. 🟡 Moderate = 25-60%. 🔴 Heavy = over 60%. ' +
+      'Only include routes matching the severity the operator actually asked about ' +
+      '(e.g. "heavily congested" means 🔴 only, not 🟡 - do not lump severities together unless asked for all of them).\n\n' +
+      'How to format the answer:\n' +
+      '- If the operator asked about ONE specific, already-known route, answer in a normal, direct sentence ' +
+      '(e.g. "Harmu Chowk to CM House currently has a 55.5% delay - moderate congestion.").\n' +
+      '- If the operator asked for a LIST of routes (e.g. "which roads are congested"), use one route per line: ' +
+      '🔴 Origin → Destination — 68% delay\n' +
+      '- If the operator asked to COMPARE options or find the BEST/fastest way to reach somewhere, ' +
+      'use a short bulleted list, one option per line starting with "- ", each showing the route and its delay, ' +
+      'then end with one short "Best option: ..." line naming the clear winner. Never merge multiple options into one paragraph.\n' +
+      '- For anything else (e.g. "traffic status around X", "how\'s it looking near Y"), write a short natural-language ' +
+      'summary in plain sentences describing the routes touching that area - do NOT copy the raw snapshot rows verbatim ' +
+      '(never output distance/travel-time/free-flow numbers exactly as given below; paraphrase them into a sentence instead).\n' +
+      'In all cases: no restating the full data dump, no filler commentary - just the direct answer. ' +
+      'If nothing matches, say so in one short sentence.\n\n' +
+      `Current route snapshot:\n${snapshot || '(no routes currently monitored)'}`;
+
+    const model = process.env.GROQ_MODEL || 'llama-3.3-70b-versatile';
+
+    const groqRes = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${apiKey}`
+      },
+      body: JSON.stringify({
+        model,
+        temperature: 0.2,
+        messages: [
+          { role: 'system', content: systemPrompt },
+          { role: 'user', content: question }
+        ]
+      }),
+      signal: AbortSignal.timeout(15000)
+    });
+
+    if (!groqRes.ok) {
+      const errBody = await groqRes.text();
+      console.error('Groq API error:', groqRes.status, errBody);
+      return res.status(502).json({ error: 'AI service request failed' });
+    }
+
+    const groqJson = await groqRes.json();
+    const answer = groqJson.choices?.[0]?.message?.content?.trim();
+
+    if (!answer) {
+      return res.status(502).json({ error: 'AI service returned an empty response' });
+    }
+
+    res.json({ answer });
+  } catch (err) {
+    console.error('Error POST /ask:', err);
+    res.status(500).json({ error: 'Failed to process question' });
+  }
+});
+
 module.exports = router;
